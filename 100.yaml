@@ -14,12 +14,11 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name "SajatFelhasznaloNeved"    # Itt add meg a GitHub felhasználóneved
-          git config user.email "email@példád.hu"         # Fontos, hogy olyan mail legyen, amit a GitHub-fiókodhoz verifikáltál!
+          git config user.name "andrijajovanovic98" 
+          git config user.email "andrija.jovanovic1998@gmail.com"        
 
       - name: Make 100 commits
         run: |
-          # Hozunk létre egy fájlt, amibe minden commitnál írunk valamit
           touch commits.txt
           for i in $(seq 1 100)
           do
