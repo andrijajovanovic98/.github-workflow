@@ -1,4 +1,4 @@
-name: Create 100 contributions
+name: Create 100 contributionss
 
 on:
   workflow_dispatch:
