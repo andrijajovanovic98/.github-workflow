@@ -21,7 +21,7 @@ jobs:
         run: |
           # Hozunk létre egy fájlt, amibe minden commitnál írunk valamit
           touch commits.txt
-          for i in $(seq 1 100)
+          for i in $(seq 1 365)
           do
             # A dátumot pl. i nappal ezelőttre állítjuk (így szétszórva a commitokat)
             # Ha mind a 100-at ugyanarra a napra akarod, elhagyhatod a 'date -d...' részt.
