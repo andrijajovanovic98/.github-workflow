@@ -1,0 +1,45 @@
+name: Create Random Contributions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create_365_commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "andrijajovanovic98"
+          git config user.email "andrija.jovanovic1998@gmail.com"
+
+      - name: Make random commits for 365 days
+        run: |
+          touch commits.txt
+          DAYS_AGO=365  # 365 napra visszamenőleg
+
+          for i in $(seq 1 $DAYS_AGO)
+          do
+            COMMIT_COUNT=$((1 + RANDOM % 20))  # Random 1 és 20 közötti commit egy napra
+            COMMIT_DATE=$(date -d "$i days ago" "+%Y-%m-%dT%H:%M:%S")
+
+            for j in $(seq 1 $COMMIT_COUNT)
+            do
+              echo "Commit #$j on $COMMIT_DATE" >> commits.txt
+              git add commits.txt
+
+              GIT_AUTHOR_DATE="$COMMIT_DATE" \
+              GIT_COMMITTER_DATE="$COMMIT_DATE" \
+              git commit -m "Random fake commit #$j on $COMMIT_DATE"
+            done
+          done
+
+      - name: Push changes
+        run: |
+          git push origin HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
